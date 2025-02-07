@@ -1,7 +1,10 @@
+Connect-ExchangeOnline
+
+
 $UserEmail = "benutzer@domain.de"
 $Operations = @("FileDownloaded", "FileAccessed", "FileDeleted", "FileCopied", "SharingSet", "FolderMoved", "FolderDeleted")
 
-$AuditLogs = Search-UnifiedAuditLog -StartDate (Get-Date).AddDays(-300) -EndDate (Get-Date) -UserIds $UserEmail -RecordType SharePointFileOperation -Operations $Operations |
+$AuditLogs = Search-UnifiedAuditLog -StartDate (Get-Date).AddDays(-30) -EndDate (Get-Date) -UserIds $UserEmail -RecordType SharePointFileOperation -Operations $Operations |
 ForEach-Object {
     $AuditData = $_.AuditData | ConvertFrom-Json
     [PSCustomObject]@{
@@ -20,3 +23,6 @@ Select-Object CreationDate, UserIds, Operations, FilePath, IP, GeoLocation, User
 Format-Table -Wrap -AutoSize
 # Export als JSON Datei
 $AuditLogs | ConvertTo-Json -Depth 3 | Out-File "AuditLogData.json"
+
+
+Disconnect-ExchangeOnline -Confirm:$false
