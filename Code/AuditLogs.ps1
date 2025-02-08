@@ -23,6 +23,7 @@ Select-Object CreationDate, UserIds, Operations, FilePath, IP, GeoLocation, User
 Format-Table -Wrap -AutoSize
 # Export als JSON Datei
 $AuditLogs | ConvertTo-Json -Depth 3 | Out-File "AuditLogData.json"
+$AuditLogs | Export-Csv -Path "AuditLogData.csv" -NoTypeInformation -Encoding UTF8
 
 
 Disconnect-ExchangeOnline -Confirm:$false

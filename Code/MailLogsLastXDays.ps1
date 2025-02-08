@@ -49,8 +49,9 @@ $Emaillog |
     Select-Object Zeitstempel, NachrichtID, Absender, Empfänger, Betreff, Operation, Anhang, ClientIP, ClientInfo |
     Format-Table -Wrap -AutoSize
 
-# Export als JSON Datei
+# Export als JSON und CSV Datei
 $Emaillog | ConvertTo-Json -Depth 3 | Out-File "EmailLogData.json"
+$Emaillog | Export-Csv -Path "EmailLogData.csv" -NoTypeInformation -Encoding UTF8
 
 Disconnect-ExchangeOnline -Confirm:$false
 
