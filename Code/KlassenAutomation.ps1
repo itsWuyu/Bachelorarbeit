@@ -77,7 +77,6 @@ $internLabel = Get-Label | Where-Object { $_.DisplayName -eq "Intern" }
 
 # Veröffentlichungsrichtlinie für die Gruppe GF erstellen
 $policyNameGF = "Richtlinie Geschäftsführung"
-$policyDescriptionGF = "Diese Richtlinie stellt sicher, dass die Geschäftsführung alle Labels nutzen kann."
 
 New-LabelPolicy `
        -Name $policyNameGF  `
